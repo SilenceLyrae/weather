@@ -3,11 +3,16 @@
 
 :root {
   --border: 1px solid rgb(0, 0, 0);
+  --color-white: #fff;
+  --entire: 100%;
+  --font1: 24px;
+  --font2: 18px;
+  --font3: 70px;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 24px;
+  font-size: var(--font1);
 }
 
 .main {
@@ -28,14 +33,14 @@ body {
 
 .search-wrapper {
   height: 10%;
-  width: 100%;
+  width: var(--entire);
   border-bottom: var(--border);
 }
 
 .search-form {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: var(--entire);
+  height: var(--entire);
 }
 
 .search-btn-label {
@@ -44,8 +49,8 @@ body {
 }
 
 .search {
-  width: 100%;
-  height: 100%;
+  width: var(--entire);
+  height: var(--entire);
   padding-left: 16px;
 }
 
@@ -89,7 +94,7 @@ body {
 .locations,
 .active-city-details,
 .active-city-forecast {
-  width: 100%;
+  width: var(--entire);
   height: 18%;
   padding-left: 6%;
   padding-top: 10%;
@@ -114,7 +119,7 @@ body {
 }
 
 .temperature-main {
-  font-size: 70px;
+  font-size: var(--font3);
 }
 
 .now-tab {
@@ -151,7 +156,7 @@ body {
 }
 
 .city:hover {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .city::after {
@@ -164,7 +169,7 @@ body {
   top: 0;
   bottom: 0;
   left: -100%;
-  right: 100%;
+  right: var(--entire);
   transition: all 0.55s;
 }
 
@@ -215,7 +220,7 @@ body {
   display: grid;
   align-items: end;
   justify-items: center;
-  font-size: 18px;
+  font-size: var(--font2);
 }
 
 .icon-item {
@@ -238,7 +243,7 @@ body {
 .tab-btn {
   flex: 0 0 33.333333%;
   height: 101%;
-  font-size: 18px;
+  font-size: var(--font2);
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -251,12 +256,12 @@ body {
 }
 
 .active-btn {
-  color: #fff;
+  color: var(--color-white);
   background-color: #000;
 }
 
 .tab-btn:hover {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .tab-btn::after {
@@ -286,13 +291,10 @@ body {
 }
 
 @media (max-width: 420px) {
-  body {
-    font-size: 19px;
-  }
-
-  .tab-btn,
-  .forecast-item {
-    font-size: 13px;
+  :root {
+    --font1: 19px;
+    --font2: 13px;
+    --font3: 60px;
   }
 
   .forecast-block {
