@@ -1,4 +1,4 @@
-import { API, SRC_IMG } from './constants.js';
+import { API, SRC_IMG } from './data.js';
 import { ELEMENT, CLASS } from './ui.js';
 import { render } from './render.js';
 

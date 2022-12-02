@@ -1,6 +1,6 @@
 import { ELEMENT, CLASS } from './ui.js';
 import { parsing } from './conversion.js';
-import { API, ERROR } from './constants.js';
+import { API, ERROR } from './data.js';
 import { render } from './render.js';
 import {
   changeFavoritesList,
@@ -26,7 +26,7 @@ function handleSendingData(event) {
 }
 
 function getWeatherData(cityName) {
-  const url = `${API.URL}?q=${cityName}&appid=${API.KEY}`;
+  const url = `${API.URL_WEATHER}?q=${cityName}&appid=${API.KEY}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {

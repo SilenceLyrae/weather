@@ -1,5 +1,5 @@
 import { ELEMENT } from './ui.js';
-import { EXTRA_VARIABLE, WEATHER_CONDITION, SRC_IMG } from './constants.js';
+import { EXTRA_VARIABLE, WEATHER_CONDITION, SRC_IMG } from './data.js';
 import { getWeatherData } from './weather.js';
 import { favoritesList } from './favorites.js';
 

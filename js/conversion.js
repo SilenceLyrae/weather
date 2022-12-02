@@ -1,4 +1,4 @@
-import { EXTRA_VARIABLE, ERROR } from './constants.js';
+import { EXTRA_VARIABLE, ERROR } from './data.js';
 import { storage } from './favorites.js';
 import {
   updateCityName,
