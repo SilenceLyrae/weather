@@ -1,4 +1,4 @@
-const UI_ELEMENT = {
+const ELEMENT = {
   BUTTONS_WRAPPER: document.querySelector('.tab-wrapper-btn'),
   BUTTONS: document.querySelectorAll('.tab-btn'),
   TABS_WEATHER: document.querySelectorAll('.tab'),
@@ -20,11 +20,11 @@ const UI_ELEMENT = {
   FAVORITE_CITIES: document.querySelectorAll('.city'),
 };
 
-const UI_CLASS = {
+const CLASS = {
   ACTIVE_BTN: 'active-btn',
   ACTIVE_TAB: 'active-tab',
   INACTIVE_TAB: 'inactive-tab',
   ACTIVE_LIKE: 'active-like',
 };
 
-export { UI_ELEMENT, UI_CLASS };
+export { ELEMENT, CLASS };

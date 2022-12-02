@@ -1,6 +1,6 @@
-import { UI_ELEMENT, UI_CLASS } from './ui.js';
+import { ELEMENT, CLASS } from './ui.js';
 import { parsing } from './conversion.js';
-import { SERVER, ERROR } from './constants.js';
+import { API, ERROR } from './constants.js';
 import { render } from './render.js';
 import {
   changeFavoritesList,
@@ -8,13 +8,13 @@ import {
   currentCity,
 } from './favorites.js';
 
-UI_ELEMENT.FORM.addEventListener('submit', handleSendingData);
-UI_ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
+ELEMENT.FORM.addEventListener('submit', handleSendingData);
+ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
 document.addEventListener('DOMContentLoaded', () => {
   getWeatherData(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 });
-for (let btn of UI_ELEMENT.BUTTONS) {
+for (let btn of ELEMENT.BUTTONS) {
   btn.addEventListener('click', changeActiveBtn);
 }
 
@@ -26,7 +26,7 @@ function handleSendingData(event) {
 }
 
 function getWeatherData(cityName) {
-  const url = `${SERVER.URL}?q=${cityName}&appid=${SERVER.API_KEY}`;
+  const url = `${API.URL}?q=${cityName}&appid=${API.KEY}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -48,29 +48,29 @@ function getWeatherData(cityName) {
 
 function changeActiveBtn(event) {
   const btnClicked = event.target;
-  UI_ELEMENT.BUTTONS.forEach((btn) => {
-    if (btnClicked !== btn && btn.classList.contains(UI_CLASS.ACTIVE_BTN)) {
-      btn.classList.remove(UI_CLASS.ACTIVE_BTN);
+  ELEMENT.BUTTONS.forEach((btn) => {
+    if (btnClicked !== btn && btn.classList.contains(CLASS.ACTIVE_BTN)) {
+      btn.classList.remove(CLASS.ACTIVE_BTN);
     }
   });
-  btnClicked.classList.contains(UI_CLASS.ACTIVE_BTN) ||
-    btnClicked.classList.add(UI_CLASS.ACTIVE_BTN) + changeTabView(btnClicked);
+  btnClicked.classList.contains(CLASS.ACTIVE_BTN) ||
+    btnClicked.classList.add(CLASS.ACTIVE_BTN) + changeTabView(btnClicked);
 }
 
 const changeTabView = (btnClicked) => {
   const tabBtn = btnClicked.dataset.tab;
-  UI_ELEMENT.TABS_WEATHER.forEach((element) => {
+  ELEMENT.TABS_WEATHER.forEach((element) => {
     const tab = element.dataset.tab;
     switch (tab) {
       case tabBtn:
-        element.classList.contains(UI_CLASS.ACTIVE_TAB) ||
-          element.classList.add(UI_CLASS.ACTIVE_TAB) +
-            element.classList.remove(UI_CLASS.INACTIVE_TAB);
+        element.classList.contains(CLASS.ACTIVE_TAB) ||
+          element.classList.add(CLASS.ACTIVE_TAB) +
+            element.classList.remove(CLASS.INACTIVE_TAB);
         break;
       default:
-        element.classList.contains(UI_CLASS.INACTIVE_TAB) ||
-          element.classList.add(UI_CLASS.INACTIVE_TAB) +
-            element.classList.remove(UI_CLASS.ACTIVE_TAB);
+        element.classList.contains(CLASS.INACTIVE_TAB) ||
+          element.classList.add(CLASS.INACTIVE_TAB) +
+            element.classList.remove(CLASS.ACTIVE_TAB);
         break;
     }
   });

@@ -1,6 +1,6 @@
-const SERVER = {
+const API = {
   URL: 'https://api.openweathermap.org/data/2.5/weather',
-  API_KEY: 'f660a2fb1e4bad108d6160b7f58c555f',
+  KEY: 'f660a2fb1e4bad108d6160b7f58c555f',
   START_CITY: 'Rome',
 };
 
@@ -72,4 +72,4 @@ const ERROR = {
   NaN: 'Data error, not a number received',
 };
 
-export { SERVER, WEATHER_CONDITION, EXTRA_VARIABLE, SRC_IMG, ERROR };
+export { API, WEATHER_CONDITION, EXTRA_VARIABLE, SRC_IMG, ERROR };
