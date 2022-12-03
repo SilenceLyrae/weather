@@ -5,6 +5,7 @@ import { favoritesList } from './favorites.js';
 
 const render = () => {
   ELEMENT.FAVORITES_LIST.replaceChildren();
+  ELEMENT.TAB_LIST_FORECAST.replaceChildren();
   favoritesList.forEach((city) => createFavoriteCity(city));
 };
 

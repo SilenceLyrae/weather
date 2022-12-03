@@ -11,7 +11,8 @@ import {
 ELEMENT.FORM.addEventListener('submit', handleSendingData);
 ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
 document.addEventListener('DOMContentLoaded', () => {
-  getWeatherData(currentCity) + getForecastData(currentCity);
+  getWeatherData(currentCity);
+  getForecastData(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 });
 for (let btn of ELEMENT.BUTTONS) {
@@ -35,6 +36,7 @@ function getWeatherData(cityName) {
         throw new Error(ERROR.INCORRECT_CITY);
       }
       parseWeather(data);
+      render();
     })
     .catch((error) => {
       switch (error.message) {
