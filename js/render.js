@@ -31,6 +31,7 @@ const updateCityName = (cityName) => {
   } else {
     ELEMENT.LIKE.src = SRC_IMG.HEART;
   }
+  renderForecast();
 };
 
 const updateTemperature = (temperature, feelsLike) => {
