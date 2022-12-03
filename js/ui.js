@@ -16,7 +16,7 @@ const ELEMENT = {
 };
 
 const CLASS = {
-  ACTIVE_BTN: 'active-btn',
+  ACTIVE_BUTTON: 'active-btn',
   ACTIVE_TAB: 'active-tab',
   INACTIVE_TAB: 'inactive-tab',
   ACTIVE_LIKE: 'active-like',

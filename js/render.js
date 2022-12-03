@@ -5,9 +5,10 @@ import { favoritesList } from './favorites.js';
 
 const render = () => {
   ELEMENT.FAVORITES_LIST.replaceChildren();
-  ELEMENT.TAB_LIST_FORECAST.replaceChildren();
   favoritesList.forEach((city) => createFavoriteCity(city));
 };
+
+const renderForecast = () => ELEMENT.TAB_LIST_FORECAST.replaceChildren();
 
 const createFavoriteCity = (city) => {
   const cityWrapper = CREATE_ELEMENT.LI();
@@ -17,6 +18,7 @@ const createFavoriteCity = (city) => {
   cityWrapper.addEventListener('click', () => {
     getWeatherData(city);
     getForecastData(city);
+    renderForecast();
   });
 };
 

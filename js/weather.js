@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   getForecastData(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 });
-for (let btn of ELEMENT.BUTTONS) {
-  btn.addEventListener('click', changeActiveBtn);
+for (let button of ELEMENT.BUTTONS) {
+  button.addEventListener('click', changeActiveButton);
 }
 
 function handleSendingData(event) {
@@ -36,7 +36,6 @@ function getWeatherData(cityName) {
         throw new Error(ERROR.INCORRECT_CITY);
       }
       parseWeather(data);
-      render();
     })
     .catch((error) => {
       switch (error.message) {
@@ -59,23 +58,27 @@ function getForecastData(cityName) {
     .catch((error) => console.log(`${error}`));
 }
 
-function changeActiveBtn(event) {
-  const btnClicked = event.target;
-  ELEMENT.BUTTONS.forEach((btn) => {
-    if (btnClicked !== btn && btn.classList.contains(CLASS.ACTIVE_BTN)) {
-      btn.classList.remove(CLASS.ACTIVE_BTN);
+function changeActiveButton(event) {
+  const buttonClicked = event.target;
+  ELEMENT.BUTTONS.forEach((button) => {
+    if (
+      buttonClicked !== button &&
+      button.classList.contains(CLASS.ACTIVE_BUTTON)
+    ) {
+      button.classList.remove(CLASS.ACTIVE_BUTTON);
     }
   });
-  btnClicked.classList.contains(CLASS.ACTIVE_BTN) ||
-    btnClicked.classList.add(CLASS.ACTIVE_BTN) + changeTabView(btnClicked);
+  buttonClicked.classList.contains(CLASS.ACTIVE_BUTTON) ||
+    buttonClicked.classList.add(CLASS.ACTIVE_BUTTON) +
+      changeTabView(buttonClicked);
 }
 
-const changeTabView = (btnClicked) => {
-  const tabBtn = btnClicked.dataset.tab;
+const changeTabView = (buttonClicked) => {
+  const tabButton = buttonClicked.dataset.tab;
   ELEMENT.TABS_WEATHER.forEach((element) => {
     const tab = element.dataset.tab;
     switch (tab) {
-      case tabBtn:
+      case tabButton:
         element.classList.contains(CLASS.ACTIVE_TAB) ||
           element.classList.add(CLASS.ACTIVE_TAB) +
             element.classList.remove(CLASS.INACTIVE_TAB);
