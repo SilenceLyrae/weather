@@ -8,7 +8,7 @@ const render = () => {
   favoritesList.forEach((city) => createFavoriteCity(city));
 };
 
-const renderForecast = () => ELEMENT.TAB_LIST_FORECAST.replaceChildren();
+const clearForecastList = () => ELEMENT.TAB_LIST_FORECAST.replaceChildren();
 
 const createFavoriteCity = (city) => {
   const cityWrapper = CREATE_ELEMENT.LI();
@@ -30,7 +30,7 @@ const updateCityName = (cityName) => {
   } else {
     ELEMENT.LIKE.src = SRC_IMG.HEART;
   }
-  renderForecast();
+  clearForecastList();
 };
 
 const updateTemperature = (temperature, feelsLike) => {
