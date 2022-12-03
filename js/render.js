@@ -18,7 +18,6 @@ const createFavoriteCity = (city) => {
   cityWrapper.addEventListener('click', () => {
     getWeatherData(city);
     getForecastData(city);
-    renderForecast();
   });
 };
 
