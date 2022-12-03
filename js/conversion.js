@@ -44,13 +44,14 @@ const convertKelvinToCelsius = (temperature) => {
   }
 };
 
+const padTo2Digits = (number) => number.toString().padStart(2, '0');
+
 const convertUnixToTime = (dateUnix) => {
   try {
     if (isNaN(dateUnix)) throw new Error(ERROR.NaN);
     const date = new Date(dateUnix * 1000);
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const padTo2Digits = (number) => number.toString().padStart(2, '0');
     const time = `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
     return time;
   } catch (error) {
@@ -62,7 +63,6 @@ const convertUnixToDate = (dateUnix) => {
   try {
     if (isNaN(dateUnix)) throw new Error(ERROR.NaN);
     const currentDate = new Date(dateUnix * 1000);
-    const padTo2Digits = (number) => number.toString().padStart(2, '0');
     const day = padTo2Digits(currentDate.getDate());
     const month = MONTH[currentDate.getMonth()];
     const date = `${day} ${month}`;
