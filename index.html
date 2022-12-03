@@ -17,7 +17,8 @@
                 type="text"
                 class="search"
                 name="city"
-                placeholder="Search city" />
+                placeholder="Search city"
+                autocomplete="off" />
             </label>
             <label class="search-btn-label">
               <button type="submit" class="btn search-btn">
@@ -33,7 +34,7 @@
           <div class="tab now-tab active-tab" data-tab="now">
             <p class="temperature temperature-main"></p>
             <img
-              src="./assets/img/weather-condition/clouds.svg"
+              src="./assets/img/weather-state/clouds.svg"
               alt="icon"
               class="icon" />
             <div class="city-wrapper">
@@ -51,7 +52,7 @@
                 Feels like: <span class="feels-like"></span>
               </li>
               <li class="detail">
-                Weather: <span class="current-condition"></span>
+                Weather: <span class="current-state"></span>
               </li>
               <li class="detail">
                 Sunrise: <span class="time-sunrise"></span>
@@ -61,65 +62,7 @@
           </div>
           <div class="tab forecast-tab inactive-tab" data-tab="forecast">
             <p class="active-city-forecast"></p>
-            <div class="tab-list-forecast">
-              <div class="forecast-block">
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-date">Date</span>
-                  <span class="forecast-item forecast-time">Time</span>
-                </div>
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-temperature"
-                    >Temperature<br />
-                    Feels like</span
-                  >
-                  <span class="forecast-item forecast-state"
-                    >Weather <br />
-                    <img
-                      src="./assets/img/weather-condition/rain.svg"
-                      alt="icon-item"
-                      class="icon-item"
-                  /></span>
-                </div>
-              </div>
-              <div class="forecast-block">
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-date">Date</span>
-                  <span class="forecast-item forecast-time">Time</span>
-                </div>
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-temperature"
-                    >Temperature<br />
-                    Feels like</span
-                  >
-                  <span class="forecast-item forecast-state"
-                    >Weather <br />
-                    <img
-                      src="./assets/img/weather-condition/rain.svg"
-                      alt="icon-item"
-                      class="icon-item"
-                  /></span>
-                </div>
-              </div>
-              <div class="forecast-block">
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-date">Date</span>
-                  <span class="forecast-item forecast-time">Time</span>
-                </div>
-                <div class="forecast-item-block">
-                  <span class="forecast-item forecast-temperature"
-                    >Temperature<br />
-                    Feels like</span
-                  >
-                  <span class="forecast-item forecast-state"
-                    >Weather <br />
-                    <img
-                      src="./assets/img/weather-condition/rain.svg"
-                      alt="icon-item"
-                      class="icon-item"
-                  /></span>
-                </div>
-              </div>
-            </div>
+            <div class="tab-list-forecast"></div>
           </div>
           <div class="tab-wrapper-btn">
             <button class="btn tab-btn now-btn active-btn" data-tab="now">

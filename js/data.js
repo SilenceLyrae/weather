@@ -13,44 +13,44 @@ const EXTRA_VARIABLE = {
 const SRC_IMG = {
   HEART: './assets/img/heart-shape.svg',
   BLACK_HEART: './assets/img/heart-black-shape.svg',
-  MIST: './assets/img/weather-condition/mist.svg',
-  SNOW: './assets/img/weather-condition/snow.svg',
-  CLEAR: './assets/img/weather-condition/clear.svg',
-  CLOUDS: './assets/img/weather-condition/clouds.svg',
-  RAIN: './assets/img/weather-condition/rain.svg',
-  THUNDERSTORM: './assets/img/weather-condition/thunderstorm.svg',
+  MIST: './assets/img/weather-state/mist.svg',
+  SNOW: './assets/img/weather-state/snow.svg',
+  CLEAR: './assets/img/weather-state/clear.svg',
+  CLOUDS: './assets/img/weather-state/clouds.svg',
+  RAIN: './assets/img/weather-state/rain.svg',
+  THUNDERSTORM: './assets/img/weather-state/thunderstorm.svg',
 };
 
-const WEATHER_CONDITION = [
+const WEATHER_STATE = [
   {
     name: 'Thunderstorm',
     src: SRC_IMG.THUNDERSTORM,
-    condition: ['Thunderstorm'],
+    state: ['Thunderstorm'],
   },
   {
     name: 'Rain',
     src: SRC_IMG.RAIN,
-    condition: ['Drizzle', 'Rain'],
+    state: ['Drizzle', 'Rain'],
   },
   {
     name: 'Clouds',
     src: SRC_IMG.CLOUDS,
-    condition: ['Clouds'],
+    state: ['Clouds'],
   },
   {
     name: 'Clear',
     src: SRC_IMG.CLEAR,
-    condition: ['Clear'],
+    state: ['Clear'],
   },
   {
     name: 'Snow',
     src: SRC_IMG.SNOW,
-    condition: ['Snow'],
+    state: ['Snow'],
   },
   {
     name: 'Mist',
     src: SRC_IMG.MIST,
-    condition: [
+    state: [
       'Mist',
       'Smoke',
       'Haze',
@@ -73,4 +73,19 @@ const ERROR = {
   NaN: 'Data error, not a number received',
 };
 
-export { API, WEATHER_CONDITION, EXTRA_VARIABLE, SRC_IMG, ERROR };
+const MONTH = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+export { API, WEATHER_STATE, EXTRA_VARIABLE, SRC_IMG, ERROR, MONTH };

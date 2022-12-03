@@ -182,7 +182,7 @@ body {
 }
 
 .active-city-forecast {
-  height: 25%;
+  min-height: 19.5%;
 }
 
 .tab-list-forecast {
@@ -206,30 +206,52 @@ body {
   margin: auto;
   margin-bottom: 9px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-}
-
-.forecast-item-block {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+  flex-wrap: wrap;
 }
 
 .forecast-item {
-  display: grid;
-  align-items: end;
-  justify-items: center;
   font-size: var(--font2);
+}
+
+.forecast-date,
+.forecast-time {
+  padding-bottom: 9%;
+  padding-top: 3%;
+}
+
+.forecast-date,
+.forecast-temperature,
+.forecast-feels-like {
+  padding-left: 4%;
+}
+
+.forecast-time,
+.forecast-state {
+  text-align: end;
+  padding-right: 4%;
 }
 
 .icon-item {
   width: 31px;
   height: 31px;
+  margin-right: 6%;
 }
 
 .inactive-tab {
   display: none;
+}
+
+.second {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.temp-items {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
 
 /* TABS-BTN */

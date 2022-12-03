@@ -1,30 +1,38 @@
-import { EXTRA_VARIABLE, ERROR } from './data.js';
+import { EXTRA_VARIABLE, ERROR, MONTH } from './data.js';
 import { storage } from './favorites.js';
 import {
   updateCityName,
   updateTemperature,
-  updateWeatherCondition,
+  updateWeatherState,
   updateTimeDetails,
+  createItemsForecast,
 } from './render.js';
 
-const parsing = ({ name, main, weather, sys }) => {
+const parseWeather = ({ name, main, weather, sys }) => {
   updateCityName(name);
   storage.saveCurrentCity(name);
-  updateWeatherCondition(weather);
+  updateWeatherState(weather[0].main);
 
-  const temperatureKelvin = main.temp;
-  const feelsLikeKelvin = main.feels_like;
-  const temperatureCelsius = convertKelvinToCelsius(temperatureKelvin);
-  const feelsLikeCelsius = convertKelvinToCelsius(feelsLikeKelvin);
+  const temperature = convertKelvinToCelsius(main.temp);
+  const feelsLike = convertKelvinToCelsius(main.feels_like);
+  updateTemperature(temperature, feelsLike);
 
-  updateTemperature(temperatureCelsius, feelsLikeCelsius);
+  const sunrise = convertUnixToTime(sys.sunrise);
+  const sunset = convertUnixToTime(sys.sunset);
+  updateTimeDetails(sunrise, sunset);
+};
 
-  const sunriseUnix = sys.sunrise;
-  const sunsetUnix = sys.sunset;
-  const sunriseTime = convertUnixToTime(sunriseUnix);
-  const sunsetTime = convertUnixToTime(sunsetUnix);
-
-  updateTimeDetails(sunriseTime, sunsetTime);
+const parseForecast = ({ list }) => {
+  for (let element of list) {
+    const dateForecast = {
+      date: convertUnixToDate(element.dt),
+      time: convertUnixToTime(element.dt),
+      temperature: convertKelvinToCelsius(element.main.temp),
+      feels_like: convertKelvinToCelsius(element.main.feels_like),
+      state: element.weather[0].main,
+    };
+    createItemsForecast(dateForecast);
+  }
 };
 
 const convertKelvinToCelsius = (temperature) => {
@@ -50,4 +58,18 @@ const convertUnixToTime = (dateUnix) => {
   }
 };
 
-export { parsing };
+const convertUnixToDate = (dateUnix) => {
+  try {
+    if (isNaN(dateUnix)) throw new Error(ERROR.NaN);
+    const currentDate = new Date(dateUnix * 1000);
+    const padTo2Digits = (number) => number.toString().padStart(2, '0');
+    const day = padTo2Digits(currentDate.getDate());
+    const month = MONTH[currentDate.getMonth()];
+    const date = `${day} ${month}`;
+    return date;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { parseWeather, parseForecast };

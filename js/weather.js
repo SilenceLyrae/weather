@@ -1,5 +1,5 @@
 import { ELEMENT, CLASS } from './ui.js';
-import { parsing } from './conversion.js';
+import { parseWeather, parseForecast } from './conversion.js';
 import { API, ERROR } from './data.js';
 import { render } from './render.js';
 import {
@@ -11,7 +11,7 @@ import {
 ELEMENT.FORM.addEventListener('submit', handleSendingData);
 ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
 document.addEventListener('DOMContentLoaded', () => {
-  getWeatherData(currentCity);
+  getWeatherData(currentCity) + getForecastData(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 });
 for (let btn of ELEMENT.BUTTONS) {
@@ -21,7 +21,8 @@ for (let btn of ELEMENT.BUTTONS) {
 function handleSendingData(event) {
   event.preventDefault();
   const cityName = event.target.city.value;
-  cityName === ERROR.EMPTY_VALUE || getWeatherData(cityName);
+  cityName === ERROR.EMPTY_VALUE ||
+    getWeatherData(cityName) + getForecastData(cityName);
   this.reset();
 }
 
@@ -33,7 +34,7 @@ function getWeatherData(cityName) {
       if (data.name === undefined) {
         throw new Error(ERROR.INCORRECT_CITY);
       }
-      parsing(data);
+      parseWeather(data);
     })
     .catch((error) => {
       switch (error.message) {
@@ -44,6 +45,16 @@ function getWeatherData(cityName) {
           console.log(`${error}`);
       }
     });
+}
+
+function getForecastData(cityName) {
+  const url = `${API.URL_FORECAST}/?q=${cityName}&appid=${API.KEY}`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      parseForecast(data);
+    })
+    .catch((error) => console.log(`${error}`));
 }
 
 function changeActiveBtn(event) {
@@ -76,4 +87,4 @@ const changeTabView = (btnClicked) => {
   });
 };
 
-export { favoritesList, getWeatherData };
+export { favoritesList, getWeatherData, getForecastData };
