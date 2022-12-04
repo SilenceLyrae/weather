@@ -42,8 +42,8 @@ const updateTemperature = (temperature, feelsLike) => {
 
 const updateWeatherState = (state) => {
   WEATHER_STATE.forEach((object) => {
-    object.state.forEach((element) => {
-      if (element === state) {
+    object.state.forEach((value) => {
+      if (value === state) {
         ELEMENT.ICON.src = object.src;
         ELEMENT.CURRENT_STATE.textContent = state;
       }
@@ -78,17 +78,17 @@ const createItemsForecast = ({
   spanTemperature.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_TEMPERATURE}`;
   spanFeelsLike.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_FEELS_LIKE}`;
   imgIcon.className = CLASS.ICON_ITEM;
+  imgIcon.alt = CLASS.ICON_ITEM;
 
   spanDate.textContent = date;
   spanTime.textContent = time;
   spanState.textContent = state;
   spanTemperature.textContent = `Temperature: ${temperature}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
   spanFeelsLike.textContent = `Feels like: ${feels_like}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
-  imgIcon.alt = CLASS.ICON_ITEM;
 
   WEATHER_STATE.forEach((object) => {
-    object.state.forEach((element) => {
-      if (element === state) {
+    object.state.forEach((value) => {
+      if (value === state) {
         imgIcon.src = object.src;
       }
     });

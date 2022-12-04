@@ -10,13 +10,15 @@ import {
 
 ELEMENT.FORM.addEventListener('submit', handleSendingData);
 ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', handleContentLoaded);
+for (let button of ELEMENT.BUTTONS) {
+  button.addEventListener('click', changeActiveButton);
+}
+
+function handleContentLoaded() {
   getWeatherData(currentCity);
   getForecastData(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
-});
-for (let button of ELEMENT.BUTTONS) {
-  button.addEventListener('click', changeActiveButton);
 }
 
 function handleSendingData(event) {
@@ -92,4 +94,4 @@ const changeTabView = (buttonClicked) => {
   });
 };
 
-export { favoritesList, getWeatherData, getForecastData };
+export { getWeatherData, getForecastData };
