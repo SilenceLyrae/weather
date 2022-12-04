@@ -23,11 +23,11 @@ function handleContentLoaded() {
 function handleSendingData(event) {
   event.preventDefault();
   const cityName = event.target.city.value;
-  cityName === ERROR.EMPTY_VALUE || makeSecondRequest(cityName);
+  cityName === ERROR.EMPTY_VALUE || repeatRequest(cityName);
   this.reset();
 }
 
-const makeSecondRequest = (cityName) => {
+const repeatRequest = (cityName) => {
   getWeatherData(cityName);
   getForecastData(cityName);
 };
@@ -97,4 +97,4 @@ const changeTabView = (buttonClicked) => {
   });
 };
 
-export { makeSecondRequest };
+export { repeatRequest };

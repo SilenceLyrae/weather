@@ -1,6 +1,6 @@
 import { EXTRA_VARIABLE, WEATHER_STATE, SRC_IMG } from './data.js';
 import { ELEMENT, CREATE_ELEMENT, CLASS } from './ui.js';
-import { makeSecondRequest } from './weather.js';
+import { repeatRequest } from './weather.js';
 import { favoritesList } from './favorites.js';
 
 const render = () => {
@@ -15,7 +15,7 @@ const createFavoriteCity = (cityName) => {
   cityWrapper.textContent = cityName;
   cityWrapper.className = CLASS.CITY;
   ELEMENT.FAVORITES_LIST.append(cityWrapper);
-  cityWrapper.addEventListener('click', () => makeSecondRequest(cityName));
+  cityWrapper.addEventListener('click', () => repeatRequest(cityName));
 };
 
 const updateCityName = (cityName) => {
