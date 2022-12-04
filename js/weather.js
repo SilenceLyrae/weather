@@ -16,7 +16,7 @@ for (let button of ELEMENT.BUTTONS) {
 }
 
 function handleContentLoaded() {
-  makeSecondRequest(currentCity);
+  repeatRequest(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 }
 
