@@ -1,52 +1,50 @@
-import { ELEMENT, CREATE_ELEMENT, CLASS } from './ui.js';
 import { EXTRA_VARIABLE, WEATHER_STATE, SRC_IMG } from './data.js';
-import { getForecastData, getWeatherData } from './weather.js';
+import { ELEMENT, CREATE_ELEMENT, CLASS } from './ui.js';
+import { makeSecondRequest } from './weather.js';
 import { favoritesList } from './favorites.js';
 
 const render = () => {
   ELEMENT.FAVORITES_LIST.replaceChildren();
-  favoritesList.forEach((city) => createFavoriteCity(city));
+  favoritesList.forEach((cityName) => createFavoriteCity(cityName));
 };
 
 const clearForecastList = () => ELEMENT.TAB_LIST_FORECAST.replaceChildren();
 
-const createFavoriteCity = (city) => {
+const createFavoriteCity = (cityName) => {
   const cityWrapper = CREATE_ELEMENT.LI();
-  cityWrapper.textContent = city;
+  cityWrapper.textContent = cityName;
   cityWrapper.className = CLASS.CITY;
   ELEMENT.FAVORITES_LIST.append(cityWrapper);
-  cityWrapper.addEventListener('click', () => {
-    getWeatherData(city);
-    getForecastData(city);
-  });
+  cityWrapper.addEventListener('click', () => makeSecondRequest(cityName));
 };
 
 const updateCityName = (cityName) => {
   ELEMENT.ACTIVE_CITY_LIST.forEach((element) => {
     element.textContent = cityName;
   });
-  if (favoritesList.includes(cityName)) {
-    ELEMENT.LIKE.src = SRC_IMG.BLACK_HEART;
-  } else {
-    ELEMENT.LIKE.src = SRC_IMG.HEART;
-  }
+  checkLikeDisplay(cityName);
   clearForecastList();
+};
+
+const checkLikeDisplay = (cityName) => {
+  favoritesList.includes(cityName)
+    ? (ELEMENT.LIKE.src = SRC_IMG.BLACK_HEART)
+    : (ELEMENT.LIKE.src = SRC_IMG.HEART);
 };
 
 const updateTemperature = (temperature, feelsLike) => {
   ELEMENT.TEMPERATURE.forEach((element) => {
-    element.textContent = temperature + EXTRA_VARIABLE.DEGREE_SYMBOL;
+    element.textContent = `${temperature}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
   });
-  ELEMENT.FEELS_LIKE.textContent = feelsLike + EXTRA_VARIABLE.DEGREE_SYMBOL;
+  ELEMENT.FEELS_LIKE.textContent = `${feelsLike}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
 };
 
 const updateWeatherState = (state) => {
   WEATHER_STATE.forEach((object) => {
     object.state.forEach((value) => {
-      if (value === state) {
-        ELEMENT.ICON.src = object.src;
-        ELEMENT.CURRENT_STATE.textContent = state;
-      }
+      value === state
+        ? (ELEMENT.ICON.src = object.src)
+        : (ELEMENT.CURRENT_STATE.textContent = state);
     });
   });
 };
@@ -88,9 +86,7 @@ const createItemsForecast = ({
 
   WEATHER_STATE.forEach((object) => {
     object.state.forEach((value) => {
-      if (value === state) {
-        imgIcon.src = object.src;
-      }
+      value !== state || (imgIcon.src = object.src);
     });
   });
 

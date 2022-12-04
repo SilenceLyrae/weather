@@ -1,7 +1,7 @@
 import { ELEMENT, CLASS } from './ui.js';
-import { parseWeather, parseForecast } from './conversion.js';
 import { API, ERROR } from './data.js';
 import { render } from './render.js';
+import { parseWeather, parseForecast } from './conversion.js';
 import {
   changeFavoritesList,
   favoritesList,
@@ -16,18 +16,21 @@ for (let button of ELEMENT.BUTTONS) {
 }
 
 function handleContentLoaded() {
-  getWeatherData(currentCity);
-  getForecastData(currentCity);
+  makeSecondRequest(currentCity);
   favoritesList === ERROR.EMPTY_VALUE || render();
 }
 
 function handleSendingData(event) {
   event.preventDefault();
   const cityName = event.target.city.value;
-  cityName === ERROR.EMPTY_VALUE ||
-    getWeatherData(cityName) + getForecastData(cityName);
+  cityName === ERROR.EMPTY_VALUE || makeSecondRequest(cityName);
   this.reset();
 }
+
+const makeSecondRequest = (cityName) => {
+  getWeatherData(cityName);
+  getForecastData(cityName);
+};
 
 function getWeatherData(cityName) {
   const url = `${API.URL_WEATHER}?q=${cityName}&appid=${API.KEY}`;
@@ -94,4 +97,4 @@ const changeTabView = (buttonClicked) => {
   });
 };
 
-export { getWeatherData, getForecastData };
+export { makeSecondRequest };
