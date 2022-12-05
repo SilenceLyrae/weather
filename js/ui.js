@@ -22,7 +22,6 @@ const CLASS = {
   ACTIVE_LIKE: 'active-like',
   CITY: 'city',
   FORECAST_BLOCK: 'forecast-block',
-  FORECAST_ITEM: 'forecast-item',
   FORECAST_DATE: 'forecast-date',
   FORECAST_TIME: 'forecast-time',
   FORECAST_TEMPERATURE: 'forecast-temperature',

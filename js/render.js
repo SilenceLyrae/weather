@@ -70,11 +70,11 @@ const createItemsForecast = ({
   const imgIcon = CREATE_ELEMENT.IMG();
 
   divBlock.className = CLASS.FORECAST_BLOCK;
-  spanDate.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_DATE}`;
-  spanTime.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_TIME}`;
-  spanState.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_STATE}`;
-  spanTemperature.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_TEMPERATURE}`;
-  spanFeelsLike.className = `${CLASS.FORECAST_ITEM} ${CLASS.FORECAST_FEELS_LIKE}`;
+  spanDate.className = CLASS.FORECAST_DATE;
+  spanTime.className = CLASS.FORECAST_TIME;
+  spanState.className = CLASS.FORECAST_STATE;
+  spanTemperature.className = CLASS.FORECAST_TEMPERATURE;
+  spanFeelsLike.className = CLASS.FORECAST_FEELS_LIKE;
   imgIcon.className = CLASS.ICON_ITEM;
   imgIcon.alt = CLASS.ICON_ITEM;
 
