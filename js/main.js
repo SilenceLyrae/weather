@@ -2,22 +2,16 @@ import { ELEMENT, CLASS } from './ui.js';
 import { API, ERROR } from './data.js';
 import { render } from './render.js';
 import { parseWeather, parseForecast } from './conversion.js';
-import {
-  changeFavoritesList,
-  favoritesList,
-  currentCity,
-} from './favorites.js';
+import { changeFavoritesList, currentCity } from './favorites.js';
 
-ELEMENT.FORM.addEventListener('submit', handleSendingData);
-ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
 document.addEventListener('DOMContentLoaded', handleContentLoaded);
-for (let button of ELEMENT.BUTTONS) {
-  button.addEventListener('click', changeActiveButton);
-}
+ELEMENT.BUTTONS_WRAPPER.addEventListener('click', changeActiveButton);
+ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
+ELEMENT.FORM.addEventListener('submit', handleSendingData);
 
 function handleContentLoaded() {
   repeatRequest(currentCity);
-  favoritesList === ERROR.EMPTY_VALUE || render();
+  render();
 }
 
 function handleSendingData(event) {
@@ -65,33 +59,26 @@ function getForecastData(cityName) {
 
 function changeActiveButton(event) {
   const buttonClicked = event.target;
+  const active = CLASS.ACTIVE_BUTTON;
   ELEMENT.BUTTONS.forEach((button) => {
-    if (
-      buttonClicked !== button &&
-      button.classList.contains(CLASS.ACTIVE_BUTTON)
-    ) {
-      button.classList.remove(CLASS.ACTIVE_BUTTON);
-    }
+    (buttonClicked === button && !button.classList.contains(active)) ||
+      button.classList.remove(active);
   });
-  buttonClicked.classList.contains(CLASS.ACTIVE_BUTTON) ||
-    buttonClicked.classList.add(CLASS.ACTIVE_BUTTON) +
-      changeTabView(buttonClicked);
+  buttonClicked.classList.contains(active) ||
+    buttonClicked.classList.add(active) + changeTabView(buttonClicked);
 }
 
 const changeTabView = (buttonClicked) => {
   const tabButton = buttonClicked.dataset.tab;
+  const active = CLASS.ACTIVE_TAB;
   ELEMENT.TABS_WEATHER.forEach((element) => {
     const tab = element.dataset.tab;
     switch (tab) {
       case tabButton:
-        element.classList.contains(CLASS.ACTIVE_TAB) ||
-          element.classList.add(CLASS.ACTIVE_TAB) +
-            element.classList.remove(CLASS.INACTIVE_TAB);
+        element.classList.contains(active) || element.classList.add(active);
         break;
       default:
-        element.classList.contains(CLASS.INACTIVE_TAB) ||
-          element.classList.add(CLASS.INACTIVE_TAB) +
-            element.classList.remove(CLASS.ACTIVE_TAB);
+        !element.classList.contains(active) || element.classList.remove(active);
         break;
     }
   });
