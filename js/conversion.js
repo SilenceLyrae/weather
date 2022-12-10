@@ -1,4 +1,4 @@
-import { EXTRA_VARIABLE, ERROR, MONTH } from './data.js';
+import { EXTRA_VARIABLE, ERROR, MONTH, WEATHER_STATE } from './data.js';
 import { storage } from './favorites.js';
 import {
   updateCityName,
@@ -24,15 +24,23 @@ const parseWeather = ({ name, main, weather, sys }) => {
 
 const parseForecast = ({ list }) => {
   for (let element of list) {
-    const dateForecast = {
+    const forecastData = {
       date: convertUnixToDate(element.dt),
       time: convertUnixToTime(element.dt),
       temperature: convertKelvinToCelsius(element.main.temp),
       feels_like: convertKelvinToCelsius(element.main.feels_like),
       state: element.weather[0].main,
+      image: findImageForState(element.weather[0].main),
     };
-    createItemsForecast(dateForecast);
+    createItemsForecast(forecastData);
   }
+};
+
+const findImageForState = (state) => {
+  const objectForState = WEATHER_STATE.find((object) => {
+    return object.state.includes(state);
+  });
+  return objectForState.src;
 };
 
 const convertKelvinToCelsius = (temperature) => {
@@ -72,4 +80,4 @@ const convertUnixToDate = (dateUnix) => {
   }
 };
 
-export { parseWeather, parseForecast };
+export { parseWeather, parseForecast, findImageForState };
