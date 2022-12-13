@@ -20,7 +20,7 @@ const updateCityName = (cityName) => {
 };
 
 const updateLike = (cityName) => {
-  favoritesList.includes(cityName)
+  favoritesList.has(cityName)
     ? (ELEMENT.LIKE.src = SRC_IMG.BLACK_HEART)
     : (ELEMENT.LIKE.src = SRC_IMG.HEART);
 };

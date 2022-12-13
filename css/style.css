@@ -251,7 +251,7 @@ body {
   align-items: baseline;
 }
 
-/* TABS-button */
+/* BUTTONS */
 
 .tab-buttons-wrapper {
   display: flex;
@@ -302,6 +302,8 @@ body {
   transition: all 0.4s ease-out;
   transform: skewX(45deg) scale(1, 1);
 }
+
+/* MEDIA */
 
 @media (max-width: 550px) {
   .forecast-block {
