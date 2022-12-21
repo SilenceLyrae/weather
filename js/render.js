@@ -1,8 +1,8 @@
-import { ELEMENT, CREATE_ELEMENT, CLASS } from './ui.js';
 import { EXTRA_VARIABLE, SRC_IMG } from './data.js';
+import { ELEMENT, CLASS } from './ui.js';
 import { findImageForState } from './conversion.js';
 import { favoritesList } from './favorites.js';
-import { repeatRequest } from './main.js';
+import { getWeatherData } from './main.js';
 
 const render = () => {
   ELEMENT.FAVORITES_LIST.replaceChildren();
@@ -44,12 +44,25 @@ const updateTimeDetails = (sunriseTime, sunsetTime) => {
   ELEMENT.SUNSET.textContent = sunsetTime;
 };
 
+const createElement = (
+  tag,
+  className,
+  textContent = '',
+  alt = '',
+  src = ''
+) => {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = textContent;
+  element.alt = alt;
+  element.src = src;
+  return element;
+};
+
 const createFavoriteCity = (cityName) => {
-  const cityWrapper = CREATE_ELEMENT.LI();
-  cityWrapper.textContent = cityName;
-  cityWrapper.className = CLASS.CITY;
+  const cityWrapper = createElement('li', CLASS.CITY, cityName);
   ELEMENT.FAVORITES_LIST.prepend(cityWrapper);
-  cityWrapper.addEventListener('click', () => repeatRequest(cityName));
+  cityWrapper.addEventListener('click', () => getWeatherData(cityName));
 };
 
 const createItemsForecast = ({
@@ -60,38 +73,40 @@ const createItemsForecast = ({
   state,
   image,
 }) => {
-  const divBlock = CREATE_ELEMENT.DIV();
-  const spanDate = CREATE_ELEMENT.SPAN();
-  const spanTime = CREATE_ELEMENT.SPAN();
-  const spanTemperature = CREATE_ELEMENT.SPAN();
-  const spanState = CREATE_ELEMENT.SPAN();
-  const spanFeelsLike = CREATE_ELEMENT.SPAN();
-  const imgIcon = CREATE_ELEMENT.IMG();
+  const divBlock = createElement('div', CLASS.FORECAST_BLOCK);
+  const spanDate = createElement('span', CLASS.FORECAST_DATE, date);
+  const spanTime = createElement('span', CLASS.FORECAST_TIME, time);
+  const spanState = createElement('span', CLASS.FORECAST_STATE, state);
 
-  divBlock.className = CLASS.FORECAST_BLOCK;
-  spanDate.className = CLASS.FORECAST_DATE;
-  spanTime.className = CLASS.FORECAST_TIME;
-  spanState.className = CLASS.FORECAST_STATE;
-  spanTemperature.className = CLASS.FORECAST_TEMPERATURE;
-  spanFeelsLike.className = CLASS.FORECAST_FEELS_LIKE;
-  imgIcon.className = CLASS.ICON_ITEM;
-  imgIcon.alt = CLASS.ICON_ITEM;
+  const spanTemperature = createElement(
+    'span',
+    CLASS.FORECAST_TEMPERATURE,
+    `Temperature: ${temperature}${EXTRA_VARIABLE.DEGREE_SYMBOL}`
+  );
 
-  imgIcon.src = image;
+  const spanFeelsLike = createElement(
+    'span',
+    CLASS.FORECAST_FEELS_LIKE,
+    `Feels like: ${feels_like}${EXTRA_VARIABLE.DEGREE_SYMBOL}`
+  );
 
-  spanDate.textContent = date;
-  spanTime.textContent = time;
-  spanState.textContent = state;
-  spanTemperature.textContent = `Temperature: ${temperature}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
-  spanFeelsLike.textContent = `Feels like: ${feels_like}${EXTRA_VARIABLE.DEGREE_SYMBOL}`;
+  const imgIcon = createElement(
+    'img',
+    CLASS.ICON_ITEM,
+    '',
+    CLASS.ICON_ITEM,
+    image
+  );
 
   ELEMENT.TAB_LIST_FORECAST.append(divBlock);
-  divBlock.append(spanDate);
-  divBlock.append(spanTime);
-  divBlock.append(spanTemperature);
-  divBlock.append(spanState);
-  divBlock.append(spanFeelsLike);
-  divBlock.append(imgIcon);
+  divBlock.append(
+    spanDate,
+    spanTime,
+    spanTemperature,
+    spanState,
+    spanFeelsLike,
+    imgIcon
+  );
 };
 
 export {

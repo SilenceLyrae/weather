@@ -29,19 +29,4 @@ const CLASS = {
   ICON_ITEM: 'icon-item',
 };
 
-const CREATE_ELEMENT = {
-  DIV: function () {
-    return document.createElement('div');
-  },
-  LI: function () {
-    return document.createElement('li');
-  },
-  SPAN: function () {
-    return document.createElement('span');
-  },
-  IMG: function () {
-    return document.createElement('img');
-  },
-};
-
-export { ELEMENT, CLASS, CREATE_ELEMENT };
+export { ELEMENT, CLASS };

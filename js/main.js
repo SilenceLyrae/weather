@@ -10,51 +10,57 @@ ELEMENT.LIKE.addEventListener('click', changeFavoritesList);
 ELEMENT.FORM.addEventListener('submit', handleSendingData);
 
 function handleContentLoaded() {
-  repeatRequest(currentCity);
+  getWeatherData(currentCity);
   render();
 }
 
 function handleSendingData(event) {
   event.preventDefault();
   const cityName = event.target.city.value;
-  cityName === ERROR.EMPTY_VALUE || repeatRequest(cityName);
+  cityName === ERROR.EMPTY_VALUE || getWeatherData(cityName);
   this.reset();
 }
 
-const repeatRequest = (cityName) => {
-  getWeatherData(cityName);
-  getForecastData(cityName);
-};
-
-function getWeatherData(cityName) {
-  const url = `${API.URL_WEATHER}?q=${cityName}&appid=${API.KEY}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.name === undefined) {
-        throw new Error(ERROR.INCORRECT_CITY);
-      }
-      parseWeather(data);
-    })
-    .catch((error) => {
-      switch (error.message) {
-        case ERROR.FAILED_FETCH:
-          console.log(ERROR.NOT_RESPONDING);
-          break;
-        default:
-          console.log(`${error}`);
-      }
-    });
+class CustomError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = this.constructor.name;
+  }
 }
 
-function getForecastData(cityName) {
-  const url = `${API.URL_FORECAST}/?q=${cityName}&appid=${API.KEY}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      parseForecast(data);
-    })
-    .catch((error) => console.log(`${error}`));
+function createError(error, cityName) {
+  if (error === 404) {
+    throw new CustomError(ERROR.INCORRECT_CITY);
+  } else {
+    getForecastData(cityName);
+  }
+}
+
+async function getWeatherData(cityName) {
+  try {
+    let response = await fetch(API.GET_URL(cityName, API.URL_WEATHER));
+    if (response.ok) {
+      let data = await response.json();
+      parseWeather(data);
+      getForecastData(cityName);
+    } else {
+      createError(response.status, cityName);
+    }
+  } catch (error) {
+    error instanceof TypeError
+      ? alert(ERROR.NOT_RESPONDING)
+      : alert(error.message);
+  }
+}
+
+async function getForecastData(cityName) {
+  try {
+    let response = await fetch(API.GET_URL(cityName, API.URL_FORECAST));
+    let data = await response.json();
+    parseForecast(data);
+  } catch (error) {
+    alert(error.message);
+  }
 }
 
 function changeActiveButton(event) {
@@ -84,4 +90,4 @@ const changeTabView = (buttonClicked) => {
   });
 };
 
-export { repeatRequest };
+export { getWeatherData };

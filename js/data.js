@@ -3,6 +3,16 @@ const API = {
   URL_FORECAST: 'https://api.openweathermap.org/data/2.5/forecast',
   KEY: 'f660a2fb1e4bad108d6160b7f58c555f',
   START_CITY: 'Rome',
+  GET_URL: function (city, target) {
+    switch (target) {
+      case API.URL_WEATHER:
+        const urlWeather = `${API.URL_WEATHER}?q=${city}&appid=${API.KEY}`;
+        return urlWeather;
+      case API.URL_FORECAST:
+        const urlForecast = `${API.URL_FORECAST}/?q=${city}&appid=${API.KEY}`;
+        return urlForecast;
+    }
+  },
 };
 
 const EXTRA_VARIABLE = {
@@ -66,10 +76,8 @@ const WEATHER_STATE = [
 
 const ERROR = {
   EMPTY_VALUE: '',
-  INCORRECT_CITY: 'Enter the correct city name.',
+  INCORRECT_CITY: 'Not found. Please enter a correct city name.',
   NOT_RESPONDING: 'Oops! Server disconnected.',
-  FAILED_FETCH: 'Failed to fetch',
-  UNDEFINED: "Cannot read properties of undefined (reading '0')",
   NaN: 'Data error, not a number received',
 };
 
